@@ -22,7 +22,15 @@ const userSchema = new mongoose.Schema({
     },
     token:{
         type:String,
-    }
+    },
+    image:{
+        type:String
+    },
+
+    // approved:{
+    //     type:Boolean,
+    //     default:true
+    // }
 
 },{timestamps:true});
 module.exports = mongoose.model("User",userSchema);
