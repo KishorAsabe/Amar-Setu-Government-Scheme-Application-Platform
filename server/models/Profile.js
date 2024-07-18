@@ -27,7 +27,7 @@ const profileSchema = new mongoose.Schema({
     category:{
         type:String,
         required:true,
-        enum:["general","Other Backward Class (OBC)","Scheduled Caste (SC)","Scheduled Tribe (ST)" ],
+        enum:["General","Other Backward Class (OBC)","Scheduled Caste (SC)","Scheduled Tribe (ST)" ],
     
     },
    

@@ -1,0 +1,17 @@
+login- aadhar
+
+
+signup- 
+
+
+
+
+
+
+
+
+
+
+
+
+firstName, lastName, middleName, dateOfBirth, age, gender, category, otp, contactNumber, aadharNumber,
