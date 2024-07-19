@@ -7,7 +7,6 @@ function Login() {
       title="LogIn Title here"
       description1="description1 here for LogIn"
       description2="description1 here for LogIn"
-      // image={loginImg}
       formType="login"
     />
   )

@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 // import { login } from "../../../services/operations/authAPI"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
@@ -33,7 +33,7 @@ function LoginForm() {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     // Add the appropriate login logic here
-    dispatch(login(formData, navigate))
+    // dispatch(login(formData, navigate))
   }
 
   const tabData = [
@@ -56,7 +56,7 @@ function LoginForm() {
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4">
         {accountType === ACCOUNT_TYPE.STUDENT ? (
-          <label className="w-full">
+          <label className="w-full flex flex-col">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Aadhar Card Number <sup className="text-pink-200">*</sup>
             </p>
@@ -72,7 +72,7 @@ function LoginForm() {
           </label>
         ) : (
           <>
-            <label className="w-full">
+            <label className="w-full flex flex-col">
               <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                 Email Address <sup className="text-pink-200">*</sup>
               </p>
@@ -86,13 +86,13 @@ function LoginForm() {
                 className="form-style w-full"
               />
             </label>
-            <label className="relative">
+            <label className="relative w-full flex flex-col">
               <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                 Password <sup className="text-pink-200">*</sup>
               </p>
               <input
                 required
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 value={password}
                 onChange={handleOnChange}
@@ -109,11 +109,6 @@ function LoginForm() {
                   <AiOutlineEye fontSize={24} fill="#AFB2BF" />
                 )}
               </span>
-              <Link to="/forgot-password">
-                <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
-                  Forgot Password
-                </p>
-              </Link>
             </label>
           </>
         )}

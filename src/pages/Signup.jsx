@@ -8,7 +8,6 @@ function Signup() {
       title="SignUp Title here"
       description1="description1 here for SignUp"
       description2="description1 here for SignUp"
-      // image={signupImg}
       formType="signup"
     />
   )

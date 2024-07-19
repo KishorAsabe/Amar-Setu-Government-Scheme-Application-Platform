@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-// import { sendOtp } from "../../../services/operations/authAPI"
+// import { sendOtp, verifyOtp } from "../../../services/operations/authAPI"
 // import { setSignupData } from "../../../slices/authSlice"
 
 function SignupForm() {
@@ -37,6 +37,8 @@ function SignupForm() {
     aadharNumber,
   } = formData
 
+  const [isOtpSent, setIsOtpSent] = useState(false)
+
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -50,15 +52,31 @@ function SignupForm() {
     dispatch(signup(formData, navigate))
   }
 
-  const getOtp = () => {
-    // Implement the logic to generate and send OTP
-    toast.success("OTP sent to your contact number!")
+  const getOtp = async () => {
+    try {
+      // Call your API to send OTP
+      // await sendOtp({ contactNumber })
+      setIsOtpSent(true)
+      toast.success("OTP sent to your contact number!")
+    } catch (error) {
+      toast.error("Failed to send OTP. Please try again.")
+    }
+  }
+
+  const verifyOtp = async () => {
+    try {
+      // Call your API to verify OTP
+      // await verifyOtp({ contactNumber, otp })
+      toast.success("OTP verified successfully!")
+    } catch (error) {
+      toast.error("Invalid OTP. Please try again.")
+    }
   }
 
   return (
     <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
       <div className="flex gap-x-4">
-        <label>
+        <label className="flex-1">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
             First Name <sup className="text-pink-200">*</sup>
           </p>
@@ -72,7 +90,7 @@ function SignupForm() {
             className="form-style w-full"
           />
         </label>
-        <label>
+        <label className="flex-1">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
             Middle Name <sup className="text-pink-200">*</sup>
           </p>
@@ -86,7 +104,7 @@ function SignupForm() {
             className="form-style w-full"
           />
         </label>
-        <label className="w-full">
+        <label className="flex-1">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
             Last Name <sup className="text-pink-200">*</sup>
           </p>
@@ -101,8 +119,9 @@ function SignupForm() {
           />
         </label>
       </div>
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+
+      <label className="flex items-center w-full gap-x-4">
+        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
           Date of Birth <sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -112,11 +131,12 @@ function SignupForm() {
           value={dateOfBirth}
           onChange={handleOnChange}
           placeholder="Enter date of birth"
-          className="form-style w-full"
+          className="form-style flex-1"
         />
       </label>
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+
+      <label className="flex items-center w-full gap-x-4">
+        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
           Age <sup className="text-pink-200">*</sup>
         </p>
         <select
@@ -124,7 +144,7 @@ function SignupForm() {
           name="age"
           value={age}
           onChange={handleOnChange}
-          className="form-style w-full"
+          className="form-style flex-1"
         >
           <option value="" disabled>Select age</option>
           {Array.from({ length: 81 }, (_, i) => i + 10).map((age) => (
@@ -135,8 +155,8 @@ function SignupForm() {
         </select>
       </label>
 
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <label className="flex items-center w-full gap-x-4">
+        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
           Gender <sup className="text-pink-200">*</sup>
         </p>
         <select
@@ -144,7 +164,7 @@ function SignupForm() {
           name="gender"
           value={gender}
           onChange={handleOnChange}
-          className="form-style w-full"
+          className="form-style flex-1"
         >
           <option value="" disabled>Select gender</option>
           <option value="Male">Male</option>
@@ -153,8 +173,8 @@ function SignupForm() {
         </select>
       </label>
 
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <label className="flex items-center w-full gap-x-4">
+        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
           Category <sup className="text-pink-200">*</sup>
         </p>
         <select
@@ -162,7 +182,7 @@ function SignupForm() {
           name="category"
           value={category}
           onChange={handleOnChange}
-          className="form-style w-full"
+          className="form-style flex-1"
         >
           <option value="" disabled>Select category</option>
           <option value="General">General</option>
@@ -172,9 +192,9 @@ function SignupForm() {
         </select>
       </label>
 
-      <div className="w-full">
-        <label className="w-full">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <div className="flex items-center w-full gap-x-4 mt-4">
+        <label className="flex-1 flex items-center gap-x-2">
+          <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
             Contact Number <sup className="text-pink-200">*</sup>
           </p>
           <input
@@ -184,52 +204,69 @@ function SignupForm() {
             value={contactNumber}
             onChange={handleOnChange}
             placeholder="Enter contact number"
-            className="form-style w-full"
+            className="form-style flex-1"
           />
         </label>
         <button
           type="button"
           onClick={getOtp}
-          className="mt-2 bg-pink-500 text-white py-2 px-4 rounded"
+          className="bg-pink-500 text-white py-2 px-4 rounded"
         >
           Get OTP
         </button>
-        <label className="w-full mt-4">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            OTP <sup className="text-pink-200">*</sup>
-          </p>
-          <input
-            required
-            type="text"
-            name="otp"
-            value={otp}
-            onChange={handleOnChange}
-            placeholder="Enter OTP"
-            className="form-style w-full"
-          />
-        </label>
       </div>
 
-      <label className="w-full">
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Aadhar Number <sup className="text-pink-200">*</sup>
-        </p>
-        <input
-          required
-          type="text"
-          name="aadharNumber"
-          value={aadharNumber}
-          onChange={handleOnChange}
-          placeholder="Enter Aadhar number"
-          className="form-style w-full"
-        />
-      </label>
+
+      {isOtpSent && (
+        <div className="flex items-center w-full gap-x-4 mt-4">
+          <label className="flex-1 flex items-center gap-x-2">
+            <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              OTP <sup className="text-pink-200">*</sup>
+            </p>
+            <input
+              required
+              type="text"
+              name="otp"
+              value={otp}
+              onChange={handleOnChange}
+              placeholder="Enter OTP"
+              className="form-style flex-1"
+            />
+          </label>
+          <button
+            type="button"
+            onClick={verifyOtp}
+            className="bg-caribbeangreen-500 text-white py-2 px-4 rounded"
+          >
+            Verify OTP
+          </button>
+        </div>
+      )}
+
+<div className="flex items-center w-full gap-x-4 mt-4">
+  <label className="flex-1 flex items-center gap-x-2">
+    <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      Aadhar Number <sup className="text-pink-200">*</sup>
+    </p>
+    <input
+      required
+      type="text"
+      name="aadharNumber"
+      value={aadharNumber}
+      onChange={handleOnChange}
+      placeholder="Enter Aadhar number"
+      className="form-style flex-1"
+    />
+  </label>
+</div>
+
       <button
         type="submit"
         className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
       >
         Create Account
       </button>
+
     </form>
   )
 }
