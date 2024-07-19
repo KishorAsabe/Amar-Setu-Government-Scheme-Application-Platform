@@ -33,7 +33,7 @@ try{
     let result = await OTP.findOne({otp:otp});
     while(result) // if simliar entery found -> generate new otp
     {
-        otp = otpGenerator.geneate(6,{
+        otp = otpGenerator.geneate(4,{
             upperCaseAlphabets:false,
             lowerCaseAlphabets:false,
             specialChars:false,
