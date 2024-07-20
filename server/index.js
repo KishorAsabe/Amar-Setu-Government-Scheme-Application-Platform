@@ -4,9 +4,12 @@ const app = express();
 const database = require("./config/database")
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const fileUpload = require('express-fileupload');
+const { cloudinaryConnect } = require('./config/cloudinary')
 
 // route imports
 const userRoutes = require("./routes/User");
+const documentRoutes = require("./routes/Document");
 
 
 dotenv.config();
@@ -19,9 +22,16 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser())
 
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp"
+  }));
+
+  cloudinaryConnect();
 
 // routes
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/documents",documentRoutes)
 
 
 // default routes
