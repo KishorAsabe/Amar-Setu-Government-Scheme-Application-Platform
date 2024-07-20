@@ -2,7 +2,10 @@
 
 // App.css
 
-`@tailwind base;
+`
+{
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -249,3 +252,79 @@ details > summary::-webkit-details-marker {
   @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
 }
 `
+}
+
+
+// App.jsx
+{
+import React from 'react';
+import './App.css';
+
+import { Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Navbar from './components/Common/Navbar';
+import Dashboard from './pages/Dashboard';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Error from './pages/Error';
+
+import OpenRoute from './components/core/Auth/OpenRoute';
+import PrivateRoute from './components/core/Auth/PrivateRoute';
+import TempCard from './components/TempCard';
+import UploadDocs from './components/documents/UploadDocs';
+import Schema from './components/schemaz/Schema';
+import SchemaDescription from './components/schemaz/SchemaDescription';
+import { SchemaProvider } from './context/SchemaContext';
+
+const App = () => {
+  return (
+    <SchemaProvider>
+      <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+
+          {/* temp */}
+          <Route path="/temp" element={<TempCard />} />
+          <Route path="/UploadDocs" element={<UploadDocs />} />
+          <Route path="/schemas" element={<Schema />} />
+          <Route path="/schemas/:id" element={<SchemaDescription />} />
+
+          <Route 
+            path="login"
+            element={
+              <OpenRoute>
+                <Login />
+              </OpenRoute>
+            }
+          />
+          <Route 
+            path="signup"
+            element={
+              <OpenRoute>
+                <Signup />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
+    </SchemaProvider>
+  );
+};
+
+export default App;
+}

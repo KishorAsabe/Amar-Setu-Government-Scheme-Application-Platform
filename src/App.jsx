@@ -40,6 +40,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/temp" element={<TempCard />} />
         <Route path="/upload-docs" element={<UploadDocs />} />
+        
         <Route path="/schemas" element={<Schema />} />
         <Route path="/schemas/:id" element={<SchemaDescription />} />
         

@@ -6,8 +6,8 @@ export const SchemaProvider = ({ children }) => {
   const schemas = [
     {
       id: 1,
-      name: 'Schema 1',
-      shortDescription: 'Short description of Schema 1',
+      name: 'Long Term Fellowship under the Human Resource Development Programme for Health Research',
+      shortDescription: 'Long Term Fellowship” under the Human Resource Development',
       price: 100,
       isActive: true,
       details: 'Detailed description of Schema 1',
