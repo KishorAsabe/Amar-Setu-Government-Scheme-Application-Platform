@@ -15,6 +15,7 @@ import Error from './pages/Error'
 
 import OpenRoute from './components/core/Auth/OpenRoute'
 import PrivateRoute from './components/core/Auth/PrivateRoute'
+import TempCard from './components/TempCard'
 
 const App = () => {
 
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        {/* test- temp */}
+        <Route path="/temp" element={<TempCard/>} />
 
         <Route
           path="login"
