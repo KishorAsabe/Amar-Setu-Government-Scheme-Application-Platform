@@ -39,13 +39,19 @@ exports.createAdminUser = async (req, res) => {
             // Generate JWT token
             const token = jwt.sign(
                 { id: user._id, email: user.email, accountType: user.accountType },
-                process.env.JWT_SECRET,
-                { expiresIn: '1h' } // Token expires in 1 hour
+                
+                { expiresIn: '2h' } // Token expires in 1 hour
             );
 
+            user.token = token;
+
+            console.log('Token generated:', token);
+
             res.status(201).json({
+                
+                user:user,
+                token: token, 
                 message: 'Admin user created successfully',
-                token: token // Include token in response
             });
         } catch (error) {
             console.error('Error creating admin user:', error);

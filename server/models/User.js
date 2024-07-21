@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-// Remove existing unique index on aadharNumber if necessary
-userSchema.index({ aadharNumber: 1 }, { unique: true, sparse: true });
+
+// userSchema.index({ aadharNumber: 1 }, { unique: true, sparse: true });
 
 module.exports = mongoose.model("User", userSchema);
