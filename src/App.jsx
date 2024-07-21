@@ -14,7 +14,6 @@ import Error from './pages/Error';
 
 // Components
 import Navbar from './components/Common/Navbar';
-import TempCard from './components/TempCard';
 import UploadDocs from './components/documents/UploadDocs';
 import Schema from './pages/Schema';
 import SchemaDescription from './components/schemaz/SchemaDescription';
@@ -39,7 +38,6 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/temp" element={<TempCard />} />
           <Route path="/upload-docs" element={<UploadDocs />} />
 
           <Route path="/schemas" element={<Schema />} />
