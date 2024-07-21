@@ -1,4 +1,5 @@
 
+// src/pages/Schema.jsx
 import React from 'react';
 import SchemaCard from '../components/schemaz/SchemaCard';
 import { useSchemas } from '../context/SchemaContext';

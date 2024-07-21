@@ -14,7 +14,7 @@ const store = configureStore({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <SchemaProvider> {/* Wrap your app with SchemaProvider */}
@@ -23,5 +23,5 @@ root.render(
         <Toaster />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  //{/* </React.StrictMode> */}
 );

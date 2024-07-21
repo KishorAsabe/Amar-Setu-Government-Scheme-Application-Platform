@@ -37,7 +37,7 @@ const Admin = () => {
       />
 
 
-    <Schema/> // here all things are working fine
+    {/* <Schema/>  here all things are working fine */}
     </div>
 
   );
