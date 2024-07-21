@@ -1,24 +1,57 @@
-// src\components\Common\Navbar.jsx
-
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
-// import { apiConnector } from "../../services/apiConnector"
-// import { categories } from "../../services/apis"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 import ProfileDropdown from "../core/Auth/ProfileDropdown"
-
-
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
   const { totalItems } = useSelector((state) => state.cart)
   const location = useLocation()
+  const [language, setLanguage] = useState('en')
 
+  useEffect(() => {
+    const addTranslateScript = () => {
+      const script = document.createElement("script")
+      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      script.async = true
+      document.body.appendChild(script)
+    }
+
+    const initializeGoogleTranslate = () => {
+      new window.google.translate.TranslateElement({
+        pageLanguage: language,
+        includedLanguages: 'mr,en',
+        layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element')
+    }
+
+    window.googleTranslateElementInit = initializeGoogleTranslate
+
+    if (!window.google || !window.google.translate) {
+      addTranslateScript()
+    } else {
+      initializeGoogleTranslate()
+    }
+  }, [])
+
+  useEffect(() => {
+    const translateElement = document.querySelector('.goog-te-combo')
+    if (translateElement) {
+      translateElement.value = language
+      translateElement.dispatchEvent(new Event('change'))
+    }
+  }, [language])
+
+  const toggleLanguage = () => {
+    setLanguage(prevLanguage => (prevLanguage === 'en' ? 'mr' : 'en'))
+  }
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
@@ -58,8 +91,19 @@ function Navbar() {
             ))}
           </ul>
         </nav>
-        {/* Login / Signup / Dashboard */}
+        {/* Translate, Login / Signup / Dashboard */}
         <div className="hidden items-center gap-x-4 md:flex">
+          {/* Toggle Button */}
+
+
+
+          {/* <button id="google_translate_element" className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100" >bt</button> */}
+
+
+
+          <button onClick={toggleLanguage} className="mr-4 px-3 py-1 bg-blue-500 text-white rounded">
+            {language === 'en' ? 'Translate to Marathi' : 'Translate to English'}
+          </button>
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />

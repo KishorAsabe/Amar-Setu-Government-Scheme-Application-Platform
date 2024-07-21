@@ -18,6 +18,7 @@ import TempCard from './components/TempCard';
 import UploadDocs from './components/documents/UploadDocs';
 import Schema from './pages/Schema';
 import SchemaDescription from './components/schemaz/SchemaDescription';
+import Admin from './pages/Admin';
 
 // Auth Components
 import OpenRoute from './components/core/Auth/OpenRoute';
@@ -43,6 +44,8 @@ const App = () => {
 
           <Route path="/schemas" element={<Schema />} />
           <Route path="/schemas/:id" element={<SchemaDescription />} />
+
+          <Route path="/admin" element={<Admin />} />
 
           {/* Authentication Routes */}
           <Route
