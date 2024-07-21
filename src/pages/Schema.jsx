@@ -1,6 +1,6 @@
 import React from 'react';
-import SchemaCard from './SchemaCard';
-import { useSchemas } from '../../context/SchemaContext';
+import SchemaCard from '../components/schemaz/SchemaCard';
+import { useSchemas } from '../context/SchemaContext';
 
 const Schema = () => {
   const schemas = useSchemas();

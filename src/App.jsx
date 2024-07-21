@@ -16,7 +16,7 @@ import Error from './pages/Error';
 import Navbar from './components/Common/Navbar';
 import TempCard from './components/TempCard';
 import UploadDocs from './components/documents/UploadDocs';
-import Schema from './components/schemaz/Schema';
+import Schema from './pages/Schema';
 import SchemaDescription from './components/schemaz/SchemaDescription';
 
 // Auth Components
@@ -24,58 +24,58 @@ import OpenRoute from './components/core/Auth/OpenRoute';
 import PrivateRoute from './components/core/Auth/PrivateRoute';
 
 //context
-import {SchemaProvider} from './context/SchemaContext';
+import { SchemaProvider } from './context/SchemaContext';
 
 const App = () => {
   return (
 
     <SchemaProvider>
 
-    <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'>
-      <Navbar />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/temp" element={<TempCard />} />
-        <Route path="/upload-docs" element={<UploadDocs />} />
-        
-        <Route path="/schemas" element={<Schema />} />
-        <Route path="/schemas/:id" element={<SchemaDescription />} />
-        
-        {/* Authentication Routes */}
-        <Route 
-          path="/login"
-          element={
-            <OpenRoute>
-              <Login />
-            </OpenRoute>
-          }
-        />
-        <Route 
-          path="/signup"
-          element={
-            <OpenRoute>
-              <Signup />
-            </OpenRoute>
-          }
-        />
-        
-        {/* Private Routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        
-        {/* Catch-all Route */}
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </div>
+      <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'>
+        <Navbar />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/temp" element={<TempCard />} />
+          <Route path="/upload-docs" element={<UploadDocs />} />
+
+          <Route path="/schemas" element={<Schema />} />
+          <Route path="/schemas/:id" element={<SchemaDescription />} />
+
+          {/* Authentication Routes */}
+          <Route
+            path="/login"
+            element={
+              <OpenRoute>
+                <Login />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <OpenRoute>
+                <Signup />
+              </OpenRoute>
+            }
+          />
+
+          {/* Private Routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Catch-all Route */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
 
     </SchemaProvider>
   );

@@ -1,3 +1,4 @@
+// src\components\Common\Navbar.jsx
 
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { useSelector } from "react-redux"
