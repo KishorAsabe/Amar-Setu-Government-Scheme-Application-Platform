@@ -1,3 +1,4 @@
+// server\controllers\documentController.js
 const Document = require('../models/Document')
 const cloudinary = require("cloudinary").v2;
 require('dotenv').config();

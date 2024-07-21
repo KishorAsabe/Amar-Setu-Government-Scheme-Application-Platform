@@ -1,3 +1,5 @@
+// server\models\Document.js
+
 const mongoose = require('mongoose');
 
 const documentSchema = new mongoose.Schema({
