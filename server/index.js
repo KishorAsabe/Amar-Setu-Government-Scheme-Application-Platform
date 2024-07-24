@@ -11,6 +11,7 @@ const { cloudinaryConnect } = require('./config/cloudinary')
 // route imports
 const userRoutes = require("./routes/User");
 const documentRoutes = require("./routes/Document");
+const adminRoutes  = require("./routes/Admin")
 
 
 dotenv.config();
@@ -33,6 +34,11 @@ app.use(fileUpload({
 // routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/documents",documentRoutes)
+console.log('Admin routes are set up')
+app.use('/api/v1/admin', adminRoutes); 
+;
+
+
 
 
 // default routes
