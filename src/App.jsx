@@ -25,6 +25,7 @@ import PrivateRoute from './components/core/Auth/PrivateRoute';
 
 //context
 import { SchemaProvider } from './context/SchemaContext';
+// import ApplicationTrackingPage from './components/applicationTracking/ApplicationTrackingPage';
 
 const App = () => {
   return (
@@ -45,33 +46,26 @@ const App = () => {
 
           <Route path="/admin" element={<Admin />} />
 
+          {/* <Route path="/ApplicationTrackingPage" element={<ApplicationTrackingPage />} /> */}
+
           {/* Authentication Routes */}
           <Route
             path="/login"
-            element={
-              <OpenRoute>
-                <Login />
-              </OpenRoute>
-            }
-          />
+            element={<OpenRoute>
+              <Login />
+            </OpenRoute>} />
           <Route
             path="/signup"
-            element={
-              <OpenRoute>
-                <Signup />
-              </OpenRoute>
-            }
-          />
+            element={<OpenRoute>
+              <Signup />
+            </OpenRoute>} />
 
           {/* Private Routes */}
           <Route
             path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+            element={<PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>} />
 
           {/* Catch-all Route */}
           <Route path="*" element={<Error />} />

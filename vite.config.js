@@ -6,9 +6,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '0.0.0.0', // Explicitly set host to allow external connections
-    fs: {
-      strict: false
-    }
+    // host: '0.0.0.0', // Explicitly set host to allow external connections
+    // fs: {
+    //   strict: false
+    // }
   }
 })

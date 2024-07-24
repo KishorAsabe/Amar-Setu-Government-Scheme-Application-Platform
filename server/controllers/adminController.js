@@ -1,4 +1,3 @@
-
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -10,7 +9,6 @@ exports.createAdminUser = async (req, res) => {
 
     console.log('Request Body:', req.body);
 
-    
     if (secretKey && secretKey === process.env.SECRET_KEY) {
         console.log('Secret key is valid');
 
@@ -39,8 +37,8 @@ exports.createAdminUser = async (req, res) => {
             // Generate JWT token
             const token = jwt.sign(
                 { id: user._id, email: user.email, accountType: user.accountType },
-                
-                { expiresIn: '2h' } // Token expires in 1 hour
+                process.env.JWT_SECRET, // Ensure this environment variable is set correctly
+                { expiresIn: '2h' } // Token expires in 2 hours
             );
 
             user.token = token;
@@ -48,8 +46,7 @@ exports.createAdminUser = async (req, res) => {
             console.log('Token generated:', token);
 
             res.status(201).json({
-                
-                user:user,
+                user: user,
                 token: token, 
                 message: 'Admin user created successfully',
             });
