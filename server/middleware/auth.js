@@ -41,15 +41,15 @@ exports.auth = async(req,res,next)=>{
     }
 }
 
-exports.isBeneiciary = async(req,res,next)=>{
+exports.isBeneficiary = async(req,res,next)=>{
 
     try{
          
-        if(req.user.accountType !== "Beneiciary")
+        if(req.user.accountType !== "Beneficiary")
         {
             return res.status(401).json({
                 success:false,
-                message:"This is protected route for Beneiciary"
+                message:"This is protected route for Beneficiary"
             })
         }
 

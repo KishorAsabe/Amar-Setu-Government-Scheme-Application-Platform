@@ -1,66 +1,44 @@
 const User = require("../models/User");
-const OTP = require("../models/Otp");
 const jwt = require("jsonwebtoken");
-const sendOtp = require("../utils/sendOtp");
 const Profile = require("../models/Profile");
-const otpGenerator = require("otp-generator");
-
+const sendVerification = require("../utils/sendVerification");
+const verifyOTP = require("../utils/verifyOTP");
 require("dotenv").config();
 
-// send otp
+
 exports.sendOTP = async (req, res) => {
-  try {
-    const { contactNumber, aadharNumber } = req.body;
-
-    const checkUserPresent = await User.findOne({ aadharNumber });
-    if (checkUserPresent) {
-      //if present
-      return res.status(401).json({
-        success: false,
-        message: "User Is Already Registered.",
-      });
-    }
-
-    // generate otp
-    var otp = otpGenerator.generate(4, {
-      upperCaseAlphabets: false,
-      lowerCaseAlphabets: false,
-      specialChars: false,
+  let { to } = req.body;
+  const channel = "sms"
+  if (!to) {
+    return res.status(400).json({
+      success: false,
+      message: 'Phone number is required.',
     });
+  }
+  // Ensure the phone number includes the country code
+  if (!to.startsWith('+')) {
+    // Assuming +91 is the default country code; adjust if needed
+    to = `+91${to}`;
+  }
+  
 
-    // console.log("OTP :",otp);
-
-    let result = await OTP.findOne({ otp: otp });
-    while (result) {
-      // if simliar entery found -> generate new otp
-      otp = otpGenerator.geneate(4, {
-        upperCaseAlphabets: false,
-        lowerCaseAlphabets: false,
-        specialChars: false,
-      });
-    }
-
-    result = await OTP.findOne({ otp: otp });
-    const otpPayload = { contactNumber, otp };
-
-    const otpBody = await OTP.create(otpPayload);
-    // console.log("otpBody :", otpBody);
-
+  try {
+    // Call sendVerification with the correctly formatted phone number
+    const result = await sendVerification(to, channel);
+    console.log("result", result);
     return res.status(200).json({
       success: true,
-      message: "OTP Sent Successfully.",
-      otp,
+      message: "OTP sent successfully",
     });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-// signup
 
 exports.signUp = async (req, res) => {
   try {
@@ -73,8 +51,8 @@ exports.signUp = async (req, res) => {
       age,
       gender,
       category,
-      accountType,
       otp,
+      accountType,
       contactNumber,
       aadharNumber,
     } = req.body;
@@ -91,10 +69,10 @@ exports.signUp = async (req, res) => {
       !age ||
       !gender ||
       !category ||
-      !accountType ||
       !otp ||
       !contactNumber ||
-      !aadharNumber
+      !aadharNumber||
+      !accountType
     ) {
       console.log("Validation failed: missing fields");
       return res.status(403).json({
@@ -113,18 +91,13 @@ exports.signUp = async (req, res) => {
       });
     }
 
-    // Find the most recent OTP stored in the database for the contact number
-    const recentOtp = await OTP.findOne({ contactNumber })
-      .sort({ createdAt: -1 })
-      .limit(1);
-    console.log("Recent OTP:", recentOtp);
-
-    // Validate the OTP
-    if (!recentOtp || otp !== recentOtp.otp) {
-      console.log(!recentOtp ? "OTP not found" : "Invalid OTP");
+    //otp verifiaction
+    const verifyResult = await verifyOTP(contactNumber, otp);
+    if (!verifyResult.success) {
+      console.log("OTP Verification Failed");
       return res.status(400).json({
         success: false,
-        message: !recentOtp ? "OTP Not Found" : "Invalid OTP",
+        message: verifyResult.message,
       });
     }
 
@@ -150,6 +123,13 @@ exports.signUp = async (req, res) => {
     });
 
     console.log("New User:", newUser);
+
+    const token = jwt.sign(
+      { userId: newUser._id, accountType: newUser.accountType },
+      process.env.JWT_SECRET, 
+      { expiresIn: '1h' } 
+    );
+     
 
     // Return response
     return res.status(200).json({
@@ -234,10 +214,10 @@ exports.login = async (req, res) => {
         });
       }
 
-      user = await User.findOne({ email});
-    //   .populate(
-    //     "additionalDetails"
-    //   );
+      user = await User.findOne({ email });
+      //   .populate(
+      //     "additionalDetails"
+      //   );
 
       if (!user) {
         return res.status(401).json({
@@ -293,3 +273,5 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+

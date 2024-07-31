@@ -5,35 +5,35 @@ const userSchema = new mongoose.Schema({
     contactNumber: {
         type: String,
         required: function() {
-            return this.accountType === 'Beneiciary';
+            return this.accountType === 'Beneficiary';
         },
     },
     aadharNumber: {
         type: String,
         sparse: true, 
         unique: function() {
-            return this.accountType === 'Beneiciary';
+            return this.accountType === 'Beneficiary';
         },
     },
     email: {
         type: String,
         required: function() {
-            return this.accountType !== 'Beneiciary';
+            return this.accountType !== 'Beneficiary';
         },
         unique: function() {
-            return this.accountType !== 'Beneiciary';
+            return this.accountType !== 'Beneficiary';
         },
     },
     password: {
         type: String,
         required: function() {
-            return this.accountType !== 'Beneiciary';
+            return this.accountType !== 'Beneficiary';
         },
     },
     accountType: {
         type: String,
         required: true,
-        enum: ['Admin', 'Beneiciary', 'Operator'],
+        enum: ['Admin', 'Beneficiary', 'Operator'],
     },
     additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
