@@ -140,28 +140,12 @@ function Navbar() {
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
         </button>
       </div>
-      {/* Mobile Menu */}
+
+
       {menuOpen && (
         <div className="md:hidden absolute top-14 left-0 right-0 bg-richblack-800 p-4">
-          <ul className="flex flex-row justify-between items-center text-richblack-25">
-            {NavbarLinks.map((link, index) => (
-              <li key={index} className="flex-grow">
-                {link.title === "Catalog" ? null : (
-                  <Link to={link?.path} onClick={toggleMenu}>
-                    <p className={`${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
-                      {link.title}
-                    </p>
-                  </Link>
-                )}
-              </li>
-            ))}
-            
-          </ul>
-
-          
-
           <div className="flex flex-col gap-y-4 mt-4">
-            {user && user?.accountType !== ACCOUNT_TYPE.OPERATOR && (
+            {user && user?.accountType !== 'OPERATOR' && (
               <Link to="/dashboard/cart" className="relative" onClick={toggleMenu}>
                 <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
                 {totalItems > 0 && (
@@ -172,23 +156,13 @@ function Navbar() {
               </Link>
             )}
             <div id="google_translate_element" style={{ display: 'none' }}></div>
-          <button id="translate_toggle_button" onClick={toggleLanguage} className="mr-4 px-3 py-1 bg-blue-500 text-white rounded">
-            Translate
-          </button>
-            {token === null && (
-              <div className="flex flex-row justify-between  text-richblack-25">
-                <Link to="/login" onClick={toggleMenu}>
-                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
-                    Log in
-                  </button>
-                </Link>
-                <Link to="/signup" onClick={toggleMenu}>
-                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
-                    Sign up
-                  </button>
-                </Link>
-              </div>
-            )}
+            <button
+              id="translate_toggle_button"
+              onClick={toggleLanguage}
+              className="mr-4 px-3 py-1 bg-blue-500 text-white rounded"
+            >
+              Translate
+            </button>
             {token !== null && <ProfileDropdown />}
           </div>
         </div>

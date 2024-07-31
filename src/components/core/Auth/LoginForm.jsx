@@ -36,6 +36,10 @@ function LoginForm() {
     // dispatch(login(formData, navigate))
   }
 
+  const handleSignUpClick = () => {
+    navigate('/signup');
+  };
+
   const tabData = [
     {
       id: 1,
@@ -112,12 +116,34 @@ function LoginForm() {
             </label>
           </>
         )}
-        <button
-          type="submit"
-          className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
-        >
-          Sign In
-        </button>
+        {
+          accountType === ACCOUNT_TYPE.BENEFICIARY ? (
+            <div class="flex flex-row space-x-4">
+              <button
+                type="submit"
+                className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+              >
+                LogIn
+              </button>
+
+              <button
+                type="button" // Changed type to button to prevent form submission
+                onClick={handleSignUpClick}
+                className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+              >
+                SignUp
+              </button>
+            </div>
+          ) : (
+            <button
+              type="submit"
+              className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+            >
+              LogIn
+            </button>
+          )
+        }
+
       </form>
     </div>
   )
