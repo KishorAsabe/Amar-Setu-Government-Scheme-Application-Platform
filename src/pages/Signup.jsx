@@ -5,9 +5,9 @@ import Template from "../components/core/Auth/Template"
 function Signup() {
   return (
     <Template
-      title="SignUp Title here"
-      description1="description1 here for SignUp"
-      description2="description1 here for SignUp"
+      title="SignUp"
+      description1=""
+      description2=""
       formType="signup"
     />
   )

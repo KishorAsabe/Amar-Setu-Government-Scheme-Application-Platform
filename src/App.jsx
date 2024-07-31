@@ -10,14 +10,15 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import Error from './pages/Error';
+import Operator from './pages/Operator';
 
 // Components
 import Navbar from './components/Common/Navbar';
 import UploadDocs from './components/documents/UploadDocs';
 import Schema from './pages/Schema';
 import SchemaDescription from './components/schemaz/SchemaDescription';
-import Admin from './pages/Admin';
 
 // Auth Components
 import OpenRoute from './components/core/Auth/OpenRoute';
@@ -25,14 +26,16 @@ import PrivateRoute from './components/core/Auth/PrivateRoute';
 
 //context
 import { SchemaProvider } from './context/SchemaContext';
-// import ApplicationTrackingPage from './components/applicationTracking/ApplicationTrackingPage';
+import VerifyMobile from './pages/VerifyMobile';
 
 const App = () => {
   return (
 
     <SchemaProvider>
 
-      <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'>
+      {/* <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'> */}
+      <div className='flex min-h-screen w-screen flex-col bg-demoGreen font-inter'>
+
         <Navbar />
         <Routes>
           {/* Public Routes */}
@@ -46,7 +49,7 @@ const App = () => {
 
           <Route path="/admin" element={<Admin />} />
 
-          {/* <Route path="/ApplicationTrackingPage" element={<ApplicationTrackingPage />} /> */}
+          <Route path="/operator" element={<Operator />} />
 
           {/* Authentication Routes */}
           <Route
@@ -59,6 +62,14 @@ const App = () => {
             element={<OpenRoute>
               <Signup />
             </OpenRoute>} />
+          <Route
+            path="verify-mobile"
+            element={
+              <OpenRoute>
+                <VerifyMobile />
+              </OpenRoute>
+            }
+          />
 
           {/* Private Routes */}
           <Route

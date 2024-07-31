@@ -12,21 +12,22 @@ function Template({ title, description1, description2, formType }) {
       {loading ? (
         <div className="spinner"></div>
       ) : (
-        <div className="flex flex-col items-center justify-center w-full max-w-maxContent py-12">
-          {/* <div className="w-11/12 max-w-[450px] text-center"> */}
-          <div className="w-11/12 max-w-[600px] text-center">
-            <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
+        <div className="mx-auto w-11/12 max-w-[600px] md:mx-0">
+          <div className="flex justify-center ">
+            <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-customGray">
               {title}
             </h1>
-            <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
-              <span className="text-richblack-100">{description1}</span>{" "}
-              <span className="font-edu-sa font-bold italic text-blue-100">
-                {description2}
-              </span>
-            </p>
-            {formType === "signup" ? <SignupForm /> : <LoginForm />}
           </div>
+
+          <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
+            <span className="text-richblack-800">{description1}</span>{" "}
+            <span className="font-edu-sa font-bold italic text-blue-100">
+              {description2}
+            </span>
+          </p>
+          {formType === "signup" ? <SignupForm /> : <LoginForm />}
         </div>
+
       )}
     </div>
   )

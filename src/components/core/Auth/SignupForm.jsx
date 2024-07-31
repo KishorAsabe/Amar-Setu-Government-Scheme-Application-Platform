@@ -4,9 +4,6 @@ import { toast } from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-// import { sendOtp, verifyOtp } from "../../../services/operations/authAPI"
-// import { setSignupData } from "../../../slices/authSlice"
-
 function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -19,8 +16,7 @@ function SignupForm() {
     age: "",
     gender: "",
     category: "",
-    otp: "",
-    contactNumber: "",
+    contactNumber: "+91",
     aadharNumber: "",
   })
 
@@ -32,12 +28,10 @@ function SignupForm() {
     age,
     gender,
     category,
-    otp,
     contactNumber,
     aadharNumber,
   } = formData
 
-  const [isOtpSent, setIsOtpSent] = useState(false)
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
@@ -49,79 +43,63 @@ function SignupForm() {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     // Add the appropriate signup logic here
+    // redirect to 'verify-mobile' route
+
     dispatch(signup(formData, navigate))
-  }
 
-  const getOtp = async () => {
-    try {
-      // Call your API to send OTP
-      // await sendOtp({ contactNumber })
-      setIsOtpSent(true)
-      toast.success("OTP sent to your contact number!")
-    } catch (error) {
-      toast.error("Failed to send OTP. Please try again.")
-    }
-  }
+    // navigate('/verify-mobile'); // idk handle in services module
+   }
 
-  const verifyOtp = async () => {
-    try {
-      // Call your API to verify OTP
-      // await verifyOtp({ contactNumber, otp })
-      toast.success("OTP verified successfully!")
-    } catch (error) {
-      toast.error("Invalid OTP. Please try again.")
-    }
-  }
 
   return (
     <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
-      <div className="flex gap-x-4">
-        <label className="flex-1">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            First Name <sup className="text-pink-200">*</sup>
-          </p>
-          <input
-            required
-            type="text"
-            name="firstName"
-            value={firstName}
-            onChange={handleOnChange}
-            placeholder="Enter first name"
-            className="form-style w-full"
-          />
-        </label>
-        <label className="flex-1">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            Middle Name <sup className="text-pink-200">*</sup>
-          </p>
-          <input
-            required
-            type="text"
-            name="middleName"
-            value={middleName}
-            onChange={handleOnChange}
-            placeholder="Enter middle name"
-            className="form-style w-full"
-          />
-        </label>
-        <label className="flex-1">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            Last Name <sup className="text-pink-200">*</sup>
-          </p>
-          <input
-            required
-            type="text"
-            name="lastName"
-            value={lastName}
-            onChange={handleOnChange}
-            placeholder="Enter last name"
-            className="form-style w-full"
-          />
-        </label>
-      </div>
+      {/* <div className="flex gap-x-4"> */}
+      <label className="flex-1">
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
+          First Name <sup className="text-pink-200">*</sup>
+        </p>
+        <input
+          required
+          type="text"
+          name="firstName"
+          value={firstName}
+          onChange={handleOnChange}
+          placeholder="Enter first name"
+          className="form-style w-full"
+        />
+      </label>
+      <label className="flex-1">
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
+          Middle Name <sup className="text-pink-200">*</sup>
+        </p>
+        <input
+          required
+          type="text"
+          name="middleName"
+          value={middleName}
+          onChange={handleOnChange}
+          placeholder="Enter middle name"
+          className="form-style w-full"
+        />
+      </label>
+      <label className="flex-1">
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
+          Last Name <sup className="text-pink-200">*</sup>
+        </p>
+        <input
+          required
+          type="text"
+          name="lastName"
+          value={lastName}
+          onChange={handleOnChange}
+          placeholder="Enter last name"
+          className="form-style w-full"
+        />
+      </label>
+      {/* </div> */}
 
-      <label className="flex items-center w-full gap-x-4">
-        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <label className="w-full">
+        <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
           Date of Birth <sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -131,50 +109,52 @@ function SignupForm() {
           value={dateOfBirth}
           onChange={handleOnChange}
           placeholder="Enter date of birth"
-          className="form-style flex-1"
+          className="form-style w-full"
         />
       </label>
 
-      <label className="flex items-center w-full gap-x-4">
-        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Age <sup className="text-pink-200">*</sup>
-        </p>
-        <select
-          required
-          name="age"
-          value={age}
-          onChange={handleOnChange}
-          className="form-style flex-1"
-        >
-          <option value="" disabled>Select age</option>
-          {Array.from({ length: 81 }, (_, i) => i + 10).map((age) => (
-            <option key={age} value={age}>
-              {age}
-            </option>
-          ))}
-        </select>
-      </label>
+      <div className="flex gap-x-4">
+        <label className="w-full">
+          <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
+            Age <sup className="text-pink-200">*</sup>
+          </p>
+          <select
+            required
+            name="age"
+            value={age}
+            onChange={handleOnChange}
+            className="form-style w-full"
+          >
+            <option value="" disabled>Select age</option>
+            {Array.from({ length: 81 }, (_, i) => i + 10).map((age) => (
+              <option key={age} value={age}>
+                {age}
+              </option>
+            ))}
+          </select>
+        </label>
 
-      <label className="flex items-center w-full gap-x-4">
-        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          Gender <sup className="text-pink-200">*</sup>
-        </p>
-        <select
-          required
-          name="gender"
-          value={gender}
-          onChange={handleOnChange}
-          className="form-style flex-1"
-        >
-          <option value="" disabled>Select gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
+        <label className="w-full">
+          <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
+            Gender <sup className="text-pink-200">*</sup>
+          </p>
+          <select
+            required
+            name="gender"
+            value={gender}
+            onChange={handleOnChange}
+            className="form-style w-full"
+          >
+            <option value="" disabled>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+      </div>
 
-      <label className="flex items-center w-full gap-x-4">
-        <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <label className="w-full">
+        <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
           Category <sup className="text-pink-200">*</sup>
         </p>
         <select
@@ -182,7 +162,7 @@ function SignupForm() {
           name="category"
           value={category}
           onChange={handleOnChange}
-          className="form-style flex-1"
+          className="form-style w-full"
         >
           <option value="" disabled>Select category</option>
           <option value="General">General</option>
@@ -192,73 +172,36 @@ function SignupForm() {
         </select>
       </label>
 
-      <div className="flex items-center w-full gap-x-4 mt-4">
-        <label className="flex-1 flex items-center gap-x-2">
-          <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            Contact Number <sup className="text-pink-200">*</sup>
-          </p>
-          <input
-            required
-            type="text"
-            name="contactNumber"
-            value={contactNumber}
-            onChange={handleOnChange}
-            placeholder="Enter contact number"
-            className="form-style flex-1"
-          />
-        </label>
-        <button
-          type="button"
-          onClick={getOtp}
-          className="bg-pink-500 text-white py-2 px-4 rounded"
-        >
-          Get OTP
-        </button>
-      </div>
 
+      <label className="flex-1">
+        <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
+          Contact Number <sup className="text-pink-200">*</sup>
+        </p>
+        <input
+          required
+          type="text"
+          name="contactNumber"
+          value={contactNumber}
+          onChange={handleOnChange}
+          placeholder="Enter contact number"
+          className="form-style w-full"
+        />
+      </label>
 
-      {isOtpSent && (
-        <div className="flex items-center w-full gap-x-4 mt-4">
-          <label className="flex-1 flex items-center gap-x-2">
-            <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              OTP <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type="text"
-              name="otp"
-              value={otp}
-              onChange={handleOnChange}
-              placeholder="Enter OTP"
-              className="form-style flex-1"
-            />
-          </label>
-          <button
-            type="button"
-            onClick={verifyOtp}
-            className="bg-caribbeangreen-500 text-white py-2 px-4 rounded"
-          >
-            Verify OTP
-          </button>
-        </div>
-      )}
-
-<div className="flex items-center w-full gap-x-4 mt-4">
-  <label className="flex-1 flex items-center gap-x-2">
-    <p className="text-[0.875rem] leading-[1.375rem] text-richblack-5">
-      Aadhar Number <sup className="text-pink-200">*</sup>
-    </p>
-    <input
-      required
-      type="text"
-      name="aadharNumber"
-      value={aadharNumber}
-      onChange={handleOnChange}
-      placeholder="Enter Aadhar number"
-      className="form-style flex-1"
-    />
-  </label>
-</div>
+      <label className="flex-1">
+        <p className="text-[0.875rem] leading-[1.375rem] text-customGray">
+          Aadhar Number <sup className="text-pink-200">*</sup>
+        </p>
+        <input
+          required
+          type="text"
+          name="aadharNumber"
+          value={aadharNumber}
+          onChange={handleOnChange}
+          placeholder="Enter Aadhar number"
+          className="form-style w-full"
+        />
+      </label>
 
       <button
         type="submit"

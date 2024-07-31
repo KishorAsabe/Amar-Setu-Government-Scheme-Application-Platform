@@ -12,7 +12,7 @@ function LoginForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.BENEFICIARY)
   const [formData, setFormData] = useState({
     aadharCardNumber: "",
     email: "",
@@ -39,13 +39,13 @@ function LoginForm() {
   const tabData = [
     {
       id: 1,
-      tabName: "Student",
-      type: ACCOUNT_TYPE.STUDENT,
+      tabName: "Beneficiary",
+      type: ACCOUNT_TYPE.BENEFICIARY,
     },
     {
       id: 2,
-      tabName: "Instructor",
-      type: ACCOUNT_TYPE.INSTRUCTOR,
+      tabName: "Operator",
+      type: ACCOUNT_TYPE.OPERATOR,
     },
   ]
 
@@ -55,9 +55,9 @@ function LoginForm() {
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4">
-        {accountType === ACCOUNT_TYPE.STUDENT ? (
-          <label className="w-full flex flex-col">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+        {accountType === ACCOUNT_TYPE.BENEFICIARY ? (
+          <label className="w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
               Aadhar Card Number <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -73,7 +73,7 @@ function LoginForm() {
         ) : (
           <>
             <label className="w-full flex flex-col">
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
                 Email Address <sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -87,7 +87,7 @@ function LoginForm() {
               />
             </label>
             <label className="relative w-full flex flex-col">
-              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-customGray">
                 Password <sup className="text-pink-200">*</sup>
               </p>
               <input
