@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css or main.css */
+.translate-button {
+    @apply p-2 bg-blue-500 text-white rounded text-center cursor-pointer hover:bg-blue-700;
+  }
+  
+  .translate-button .goog-te-gadget-simple {
+    border: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
+  
+  .translate-button .goog-te-gadget-simple .goog-te-menu-value {
+    display: none !important;
+  }
+  
+  .translate-button .goog-te-gadget-icon {
+    display: none !important;
+  }
+  
