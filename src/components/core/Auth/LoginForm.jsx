@@ -39,12 +39,12 @@ function LoginForm() {
   const tabData = [
     {
       id: 1,
-      tabName: "Student",
+      tabName: "Beneficiary",
       type: ACCOUNT_TYPE.STUDENT,
     },
     {
       id: 2,
-      tabName: "Instructor",
+      tabName: "Operator",
       type: ACCOUNT_TYPE.INSTRUCTOR,
     },
   ]
@@ -57,7 +57,7 @@ function LoginForm() {
       <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4">
         {accountType === ACCOUNT_TYPE.STUDENT ? (
           <label className="w-full flex flex-col">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className=" sm:ml-[-27.75rem] xs:ml-[-14.5rem] mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Aadhar Card Number <sup className="text-pink-200">*</sup>
             </p>
             <input
