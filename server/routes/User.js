@@ -4,12 +4,13 @@ const router = express.Router();
 //import controllers
 const {sendOTP,signUp,login } = require('../controllers/Auth');
 
+
 // middlwware
 const {auth} = require("../middleware/auth");
 
 
 // Route for sendOtp 
-router.post('/sendOtp',sendOTP);
+router.post('/sendotp',sendOTP);
 router.post('/signup',signUp);
 router.post('/login',login);
 
