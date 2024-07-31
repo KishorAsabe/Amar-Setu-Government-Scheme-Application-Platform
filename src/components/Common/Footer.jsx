@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-richblack-800">
+    <div className="bg-white">
       <div>
         <p className="text-center ">
           
