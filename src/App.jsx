@@ -27,6 +27,10 @@ import PrivateRoute from './components/core/Auth/PrivateRoute';
 //context
 import { SchemaProvider } from './context/SchemaContext';
 import VerifyContact from './pages/Verification';
+import NavbarForMobile from './components/navbarForMobile/NavbarForMobile';
+
+
+
 
 const App = () => {
   return (
@@ -36,7 +40,14 @@ const App = () => {
       {/* <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'> */}
       <div className='flex min-h-screen w-screen flex-col bg-demoGreen font-inter'>
 
-        <Navbar />
+        <div className="hidden md:block">
+          <Navbar />
+        </div>
+        <div className="md:hidden">
+          <NavbarForMobile />
+        </div>
+
+
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />

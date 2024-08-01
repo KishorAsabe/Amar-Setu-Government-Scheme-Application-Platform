@@ -7,6 +7,7 @@ import logo from "../../assets/Logo/Logo-Full-Light.png";
 import { NavbarLinks } from "../../data/navbar-links";
 import { ACCOUNT_TYPE } from "../../utils/constants";
 import ProfileDropdown from "../core/Auth/ProfileDropdown";
+import NavbarForMobile from "../navbarForMobile/NavbarForMobile";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
@@ -113,11 +114,6 @@ function Navbar() {
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
-              {/* {totalItems > 0 && (
-                <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
-                  {totalItems}
-                </span>
-              )} */}
             </Link>
           )}
           {token === null && (
@@ -141,18 +137,14 @@ function Navbar() {
         </button>
       </div>
 
-
-      {menuOpen && (
+      {/* Mobile Navigation */}
+      {/* {menuOpen && (
         <div className="md:hidden absolute top-14 left-0 right-0 bg-richblack-800 p-4">
+          <NavbarForMobile />
           <div className="flex flex-col gap-y-4 mt-4">
             {user && user?.accountType !== 'OPERATOR' && (
               <Link to="/dashboard/cart" className="relative" onClick={toggleMenu}>
                 <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
-                {/* {totalItems > 0 && (
-                  <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
-                    {totalItems}
-                  </span>
-                )} */}
               </Link>
             )}
             <div id="google_translate_element" style={{ display: 'none' }}></div>
@@ -163,10 +155,16 @@ function Navbar() {
             >
               Translate
             </button>
-            {token !== null && <ProfileDropdown />}
-          </div>
-        </div>
-      )}
+            {/* {token !== null && <ProfileDropdown />} */}
+          {/* </div> */}
+        {/* // </div> */}
+      {/* // )} */} 
+
+      {/* <div className="md:hidden absolute top-14 left-0 right-0 bg-richblack-800 p-4">
+          <NavbarForMobile />
+        </div> */}
+
+
     </div>
   );
 }
