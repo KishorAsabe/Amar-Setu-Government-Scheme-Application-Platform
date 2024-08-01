@@ -26,7 +26,7 @@ import PrivateRoute from './components/core/Auth/PrivateRoute';
 
 //context
 import { SchemaProvider } from './context/SchemaContext';
-import VerifyMobile from './pages/VerifyMobile';
+import VerifyContact from './pages/Verification';
 
 const App = () => {
   return (
@@ -63,10 +63,10 @@ const App = () => {
               <Signup />
             </OpenRoute>} />
           <Route
-            path="verify-mobile"
+            path="verify-contact"
             element={
               <OpenRoute>
-                <VerifyMobile />
+                <VerifyContact />
               </OpenRoute>
             }
           />

@@ -4,9 +4,17 @@ import { toast } from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
+import { sendOtp } from "../../../services/operations/authAPI"
+import { setSignupData } from "../../../slices/authSlice"
+import { ACCOUNT_TYPE } from "../../../utils/constants";
+
+
 function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  // student or instructor
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.BENEFICIARY);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -16,7 +24,7 @@ function SignupForm() {
     age: "",
     gender: "",
     category: "",
-    contactNumber: "+91",
+    contactNumber: "+91", //*
     aadharNumber: "",
   })
 
@@ -41,15 +49,37 @@ function SignupForm() {
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    // Add the appropriate signup logic here
-    // redirect to 'verify-mobile' route
 
-    dispatch(signup(formData, navigate))
+    e.preventDefault();
+    // const formattedContactNumber = contactNumber.startsWith('+91') ? contactNumber : `+91${contactNumber}`;
 
-    // navigate('/verify-mobile'); // idk handle in services module
-   }
+    const signupData = {
+      ...formData,
+      
+    };
+    
 
+    // Setting signup data to state
+    // To be used after otp verification
+    dispatch(setSignupData(signupData));
+    // Send OTP to user for verification
+    dispatch(sendOtp(formData.contactNumber, navigate));
+
+    // Reset
+    setFormData({
+     firstName: "",
+    lastName: "",
+    middleName: "",
+    dateOfBirth: "",
+    age: "",
+    gender: "",
+    category: "",
+    otp: "",
+    contactNumber: "",
+    aadharNumber: "",
+    });
+    setAccountType(ACCOUNT_TYPE.BENEFICIARY);
+  };
 
   return (
     <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">

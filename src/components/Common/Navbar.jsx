@@ -11,7 +11,7 @@ import ProfileDropdown from "../core/Auth/ProfileDropdown";
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-  const { totalItems } = useSelector((state) => state.cart);
+  // const { totalItems } = useSelector((state) => state.cart);
   const location = useLocation();
   const [language, setLanguage] = useState('en');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,11 +113,11 @@ function Navbar() {
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
-              {totalItems > 0 && (
+              {/* {totalItems > 0 && (
                 <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
                   {totalItems}
                 </span>
-              )}
+              )} */}
             </Link>
           )}
           {token === null && (
@@ -148,11 +148,11 @@ function Navbar() {
             {user && user?.accountType !== 'OPERATOR' && (
               <Link to="/dashboard/cart" className="relative" onClick={toggleMenu}>
                 <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
-                {totalItems > 0 && (
+                {/* {totalItems > 0 && (
                   <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
                     {totalItems}
                   </span>
-                )}
+                )} */}
               </Link>
             )}
             <div id="google_translate_element" style={{ display: 'none' }}></div>
