@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const fileUpload = require('express-fileupload');
 const { cloudinaryConnect } = require('./config/cloudinary')
+const cors = require('cors');
 
 // route imports
 const userRoutes = require("./routes/User");
@@ -24,6 +25,13 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser())
 
+
+app.use(
+    cors({
+      origin: "http://localhost:3000/", 
+      credentials: true,
+    })
+  );
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: "/tmp"
@@ -34,7 +42,6 @@ app.use(fileUpload({
 // routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/documents",documentRoutes)
-console.log('Admin routes are set up')
 app.use('/api/v1/admin', adminRoutes); 
 ;
 
