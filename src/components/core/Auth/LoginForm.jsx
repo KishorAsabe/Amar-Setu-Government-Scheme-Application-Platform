@@ -122,7 +122,7 @@ function LoginForm() {
             <div class="flex flex-row space-x-4">
               <button
                 type="submit"
-                className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+                className="mt-6 rounded-[8px] bg-[#1a73e8] hover:bg-[#003f88]   py-[8px] px-[12px] font-medium text-richblack-900 w-full"
               >
                 LogIn
               </button>
@@ -130,7 +130,7 @@ function LoginForm() {
               <button
                 type="button" // Changed type to button to prevent form submission
                 onClick={handleSignUpClick}
-                className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+                className="mt-6 rounded-[8px] bg-[#1a73e8] hover:bg-[#003f88] py-[8px] px-[12px] font-medium text-richblack-900 w-full"
               >
                 SignUp
               </button>
@@ -138,7 +138,7 @@ function LoginForm() {
           ) : (
             <button
               type="submit"
-              className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+              className="mt-6 rounded-[8px] bg-[#1a73e8] hover:bg-[#003f88] py-[8px] px-[12px] font-medium text-richblack-900 w-full"
             >
               LogIn
             </button>

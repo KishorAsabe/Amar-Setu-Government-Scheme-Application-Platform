@@ -71,7 +71,7 @@ const UploadDocs = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-3xl font-bold mb-4">Upload Documents</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">Upload Documents</h2>
       {message && <p className="mb-4 text-red-500">{message}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         {['AADHAAR', 'PAN_CARD', 'DRIVING_LICENSE', 'INCOME_CERTIFICATE'].map((docType) => (
@@ -99,7 +99,7 @@ const UploadDocs = () => {
 
         <button
           type="submit"
-          className="w-full px-4 py-2 bg-blue-600 text-white text-lg font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 bg-[#1a73e8] text-white text-lg font-medium rounded-md shadow-sm hover:bg-[#003f88] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           Upload
         </button>

@@ -31,14 +31,13 @@ import NavbarForMobile from './components/navbarForMobile/NavbarForMobile';
 
 
 
-
 const App = () => {
   return (
 
     <SchemaProvider>
 
       {/* <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'> */}
-      <div className='flex min-h-screen w-screen flex-col bg-demoGreen font-inter'>
+      <div className='flex min-h-screen w-screen flex-col bg-white font-inter'>
 
         <div className="hidden md:block">
           <Navbar />
@@ -61,6 +60,7 @@ const App = () => {
           <Route path="/admin" element={<Admin />} />
 
           <Route path="/operator" element={<Operator />} />
+
 
           {/* Authentication Routes */}
           <Route
