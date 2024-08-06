@@ -3,7 +3,7 @@ import React from 'react'
 const Operator = () => {
   return (
     <div>
-      Operator
+      Operator |
     </div>
   )
 }

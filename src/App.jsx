@@ -39,8 +39,8 @@ const App = () => {
       {/* <div className='flex min-h-screen w-screen flex-col bg-richblack-900 font-inter'> */}
       <div className='flex min-h-screen w-screen flex-col bg-white font-inter'>
 
-        <div className="hidden md:block">
-          <Navbar />
+        <div className="hidden md:block ">
+          <Navbar/>
         </div>
         <div className="md:hidden">
           <NavbarForMobile />

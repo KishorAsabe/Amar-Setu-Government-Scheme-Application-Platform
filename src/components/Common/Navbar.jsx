@@ -8,6 +8,7 @@ import { NavbarLinks } from "../../data/navbar-links";
 import { ACCOUNT_TYPE } from "../../utils/constants";
 import ProfileDropdown from "../core/Auth/ProfileDropdown";
 import NavbarForMobile from "../navbarForMobile/NavbarForMobile";
+import { MdGTranslate } from "react-icons/md";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
@@ -80,8 +81,7 @@ function Navbar() {
 
   return (
     <div
-      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${location.pathname !== "/" ? "bg-richblack-800" : ""
-        } transition-all duration-200`}
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 transition-all duration-200 `}
     >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         {/* Logo */}
@@ -95,7 +95,7 @@ function Navbar() {
               <li key={index}>
                 {link.title === "Catalog" ? null : (
                   <Link to={link?.path}>
-                    <p className={`${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
+                    <p className={`${matchRoute(link?.path) ? "text-blue-500" : "text-black"}`}>
                       {link.title}
                     </p>
                   </Link>
@@ -108,9 +108,12 @@ function Navbar() {
         <div className="hidden items-center gap-x-4 md:flex">
           {/* Translate Button */}
           <div id="google_translate_element" style={{ display: 'none' }}></div>
-          <button id="translate_toggle_button" onClick={toggleLanguage} className="mr-4 px-3 py-1 bg-blue-500 text-white rounded">
+          {/* <button id="translate_toggle_button" onClick={toggleLanguage} className="mr-4 px-3 py-1 bg-blue-500 text-white rounded">
             Translate
-          </button>
+          </button> */}
+          <div className='flex items-center hover:cursor-pointer '>
+            <MdGTranslate className='text-2xl' id="google_translate_element" onClick={toggleLanguage} />
+          </div>
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
@@ -118,14 +121,14 @@ function Navbar() {
           )}
           {token === null && (
             <Link to="/login">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+              <button className="rounded-[8px] border border-richblack-700 bg-[#1a73e8] hover:bg-[#003f88] px-[12px] py-[4px]">
                 Log in
               </button>
             </Link>
           )}
           {token === null && (
             <Link to="/signup">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+              <button className="rounded-[8px] border border-richblack-700 bg-[#1a73e8] hover:bg-[#003f88] px-[12px] py-[4px]">
                 Sign up
               </button>
             </Link>
@@ -156,9 +159,9 @@ function Navbar() {
               Translate
             </button>
             {/* {token !== null && <ProfileDropdown />} */}
-          {/* </div> */}
-        {/* // </div> */}
-      {/* // )} */} 
+      {/* </div> */}
+      {/* // </div> */}
+      {/* // )} */}
 
       {/* <div className="md:hidden absolute top-14 left-0 right-0 bg-richblack-800 p-4">
           <NavbarForMobile />
